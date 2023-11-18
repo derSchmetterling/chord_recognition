@@ -1,0 +1,76 @@
+from keras import backend as keras_backend
+from keras.models import Sequential, load_model
+from keras.layers import Dense, Dropout, Flatten, LeakyReLU, SpatialDropout2D, Activation, Conv2D, MaxPooling2D, BatchNormalization, GlobalAveragePooling2D
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.utils import plot_model
+from keras.callbacks import ModelCheckpoint 
+from keras.regularizers import l2
+import tensorflow as tf
+
+
+
+
+import pandas as pd
+import librosa
+import os
+import numpy as np 
+from tensorflow.keras.utils import to_categorical
+from sklearn.model_selection import train_test_split
+
+from sklearn.preprocessing import LabelEncoder
+import pickle
+
+
+
+
+# Load model mapping that relates the model prediction with the name of the chord
+with open('chords_mapping.pkl', 'rb') as f:
+    mapping = pickle.load(f)
+
+
+
+
+# # usar rede convolucional PCP
+# X_train_ffn = X_train.reshape(1447,1216,12)
+# X_test_ffn =  X_test.reshape(713,1216,12)
+
+
+
+
+def model_instance(hidden_layer):
+    model_relu = tf.keras.models.Sequential([ 
+        tf.keras.layers.Flatten(input_shape=(1216,12)), 
+        tf.keras.layers.Dense(128),
+        tf.keras.layers.Dense(256),
+        tf.keras.layers.Dense(42,activation='softmax')
+  ]) 
+
+#Compiling using loss function, Optimizer and Metrics
+    model_relu.compile(optimizer='adam',
+              loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=False),
+              metrics=['accuracy'])
+    return model_relu
+
+
+def load_model(model):
+
+    checkpoint_path = "model.ckpt"
+    #checkpoint_dir = os.path.dirname(checkpoint_path)
+
+    #latest = tf.train.latest_checkpoint(checkpoint_dir)
+
+    # Create a new model instance
+    model = model_instance(128)
+
+    # Load the previously saved weights
+    model.load_weights(checkpoint_path)
+
+    return model
+
+
+
+
+
+# le = LabelEncoder()
+# y_test_encoded = le.fit_transform(y_test)
+# y_train_encoded = le.fit_transform(y_train)
