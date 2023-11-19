@@ -1,10 +1,11 @@
 import streamlit as st
 from st_audiorec import st_audiorec
 from audiorecorder import audiorecorder
-
+import numpy as np
 from pydub import AudioSegment
 
-
+import nn_amodel as nn 
+import preprocessing_pipeline as pp
 
 
 st.set_page_config(
@@ -29,15 +30,33 @@ st.title("Reconhecimento de Acordes Guitarra")
 wav_audio_data = st_audiorec()
 
 if wav_audio_data is not None:
-    st.audio(wav_audio_data, format='audio/wav')
-    sf.write('stereo_file1.wav', wav_audio_data, 48000, 'PCM_24')
+    audio = st.audio(wav_audio_data, format='audio/wav')
 
-    #print(wav_audio_data)
-    #print(audio.audio())
+    # data_s16 é o array do audio
+    data_s16 = np.frombuffer(wav_audio_data, dtype=np.int16, count=len(wav_audio_data)//2, offset=0)
+    #np.save('chord_x', data_s16)
 
-    # data = json.load(audio)
-    # print(data)
 
+
+from scipy.io import wavfile
+
+# faz o download do áudio em .wav para permitir leitura pelo librosa
+wavfile.write('aux.wav',48000, data_s16)
+
+
+chroma =  pp.prepro_pipeline('aux.wav')
+
+predict_chord = nn.load_predict(chroma)
+
+
+
+
+
+
+
+# numpy to .wav
+# audio = np.load('dashboard/teste.npy')
+# wavfile.write('stereoAudio.wav',48000, audio)
 
 # st.title("Audio Recorder")
 # audio = audiorecorder("Click to record", "Click to stop recording")

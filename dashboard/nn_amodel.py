@@ -1,15 +1,13 @@
 from keras import backend as keras_backend
 from keras.models import Sequential, load_model
-from keras.layers import Dense, Dropout, Flatten, LeakyReLU, SpatialDropout2D, Activation, Conv2D, MaxPooling2D, BatchNormalization, GlobalAveragePooling2D
-from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.utils import plot_model
+from keras.layers import Dense, Dropout, Flatten, LeakyReLU, SpatialDropout2D, Activation
 from keras.callbacks import ModelCheckpoint 
 from keras.regularizers import l2
 import tensorflow as tf
 
 
 
-
+import pickle
 import pandas as pd
 import librosa
 import os
@@ -52,7 +50,7 @@ def model_instance(hidden_layer):
     return model_relu
 
 
-def load_model(model):
+def load_model():
 
     checkpoint_path = "model.ckpt"
     #checkpoint_dir = os.path.dirname(checkpoint_path)
@@ -68,6 +66,36 @@ def load_model(model):
     return model
 
 
+
+def get_chord(pred):
+    # Load model mapping that relates the model prediction with the name of the chord
+    with open('chords_mapping.pkl', 'rb') as f:
+        mapping = pickle.load(f)
+
+    pred_idx = np.argmax(pred, axis = 1)[0] -1 
+    reversed_mapping = dict(map(reversed, mapping.items()))
+    predicted_chord = reversed_mapping[pred_idx]
+
+    return predicted_chord
+
+
+
+
+
+def load_predict(chroma):
+    model = load_model()
+    pred = model.predict(chroma)
+
+    predicted_chord = get_chord(pred)
+
+
+    return predicted_chord
+
+
+    
+    
+    
+    
 
 
 

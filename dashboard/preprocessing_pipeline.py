@@ -3,7 +3,7 @@
 import librosa
 import numpy as np 
 import pandas as pd
-
+import tensorflow as tf
 import scipy
 
 
@@ -60,3 +60,12 @@ def add_padding(features, max_padding=174):
     return padded
 
 
+
+
+def prepro_pipeline(audio_path):
+    chroma = PCP(audio_path)[:, :1216]
+    padded_chroma = add_padding(tf.expand_dims(chroma, 0))
+    expand_chroma = tf.expand_dims(padded_chroma[0], 1)
+    reshaped_chroma = tf.reshape(expand_chroma, [1, 1216, 12])
+
+    return reshaped_chroma
