@@ -61,7 +61,7 @@ def load_model():
     model = model_instance(128)
 
     # Load the previously saved weights
-    model.load_weights(checkpoint_path)
+    model.load_weights(checkpoint_path).expect_partial()
 
     return model
 
@@ -89,7 +89,7 @@ def load_predict(chroma):
     predicted_chord = get_chord(pred)
 
 
-    return predicted_chord
+    return pred, predicted_chord
 
 
     

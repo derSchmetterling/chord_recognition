@@ -6,6 +6,7 @@ from pydub import AudioSegment
 
 import nn_amodel as nn 
 import preprocessing_pipeline as pp
+from scipy.io import wavfile
 
 
 st.set_page_config(
@@ -17,39 +18,69 @@ st.set_page_config(
 
 
 
-
-
-
-
-
 # dashboard title
-st.title("Reconhecimento de Acordes Guitarra")
+st.title("Reconhecimento de Acordes de Violão")
 
 
-
+st.header("Grave seu Acorde", divider = 'blue')
 wav_audio_data = st_audiorec()
-
 if wav_audio_data is not None:
+
+
     audio = st.audio(wav_audio_data, format='audio/wav')
-
-    # data_s16 é o array do audio
     data_s16 = np.frombuffer(wav_audio_data, dtype=np.int16, count=len(wav_audio_data)//2, offset=0)
-    #np.save('chord_x', data_s16)
+    # data_s16 é o array do audio
+    #if audio is not None:
+        
+        #np.save('chord_x', data_s16)    
+
+st.header("Predição", divider = 'blue')
+
+pred_button = st.button('Qual o acorde?')
+
+if pred_button:
+
+    wavfile.write(filename = 'chord.wav', rate = 48000, data= data_s16)
+
+    try:
+        
+        chroma =  pp.prepro_pipeline('chord.wav')
+        pred,predict_chord = nn.load_predict(chroma)
+        st.text(f'O acorde predito é:{predict_chord}')
+        st.text(pred)
+    
+    except Exception as error:
+        st.text("Nenhuma gravação foi submetida.")
+        print(error)
+
+    
 
 
 
-from scipy.io import wavfile
+
+st.header('Koda')
+st.image('Koda.webp')
+
+
+col1, col2 = st.columns((2))
+
+# with col1:
+#     st.
+
+
 
 # faz o download do áudio em .wav para permitir leitura pelo librosa
-wavfile.write('aux.wav',48000, data_s16)
-
-
-chroma =  pp.prepro_pipeline('aux.wav')
-
-predict_chord = nn.load_predict(chroma)
 
 
 
+
+
+
+
+tab1,  = st.tabs(["Acorde"])
+
+# with tab1:
+#    st.header("Acorde1")
 
 
 
