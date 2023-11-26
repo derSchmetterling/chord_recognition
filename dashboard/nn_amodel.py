@@ -17,7 +17,8 @@ from sklearn.model_selection import train_test_split
 
 from sklearn.preprocessing import LabelEncoder
 import pickle
-
+from joblib import load
+from sklearn.ensemble import RandomForestClassifier
 
 
 
@@ -52,16 +53,13 @@ def model_instance(hidden_layer):
 
 def load_model():
 
-    checkpoint_path = "model.ckpt"
+    checkpoint_path = "models/rf_model.joblib"
     #checkpoint_dir = os.path.dirname(checkpoint_path)
 
     #latest = tf.train.latest_checkpoint(checkpoint_dir)
 
     # Create a new model instance
-    model = model_instance(128)
-
-    # Load the previously saved weights
-    model.load_weights(checkpoint_path).expect_partial()
+    model = load(checkpoint_path)
 
     return model
 
@@ -86,13 +84,11 @@ def load_predict(chroma):
     model = load_model()
     pred = model.predict(chroma)
 
-    predicted_chord = get_chord(pred)
 
 
-    return pred, predicted_chord
+    return pred[0]
 
 
-    
     
     
     
