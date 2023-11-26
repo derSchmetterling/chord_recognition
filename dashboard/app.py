@@ -28,6 +28,7 @@ if wav_audio_data is not None:
 
 
     audio = st.audio(wav_audio_data, format='audio/wav')
+
     data_s16 = np.frombuffer(wav_audio_data, dtype=np.int16, count=len(wav_audio_data)//2, offset=0)
     # data_s16 é o array do audio
     #if audio is not None:
@@ -45,9 +46,9 @@ if pred_button:
     try:
         
         chroma =  pp.prepro_pipeline('chord.wav')
-        pred,predict_chord = nn.load_predict(chroma)
-        st.text(f'O acorde predito é:{predict_chord}')
-        st.text(pred)
+        pred = nn.load_predict(chroma)
+        st.text(f'O acorde predito é:{pred}')
+        #st.text(pred)
     
     except Exception as error:
         st.text("Nenhuma gravação foi submetida.")

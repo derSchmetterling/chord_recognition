@@ -41,7 +41,7 @@ def PCP(filepath, sr = 44100, filters = True):
 
 
 # Given an numpy array of features, zero-pads each ocurrence to max_padding
-def add_padding(features, max_padding=174):
+def add_padding(features, max_padding=1216):
     padded = []
 
     # Add padding
@@ -60,12 +60,28 @@ def add_padding(features, max_padding=174):
     return padded
 
 
+# preprocessing for NN model
+# def prepro_pipeline(audio_path):
+#     chroma = PCP(audio_path)[:, :1216]
+#     padded_chroma = add_padding([chroma])
+#     reshaped_padded = padded_chroma[0].reshape(1,1216,12)
+
+
+#     #padded_chroma = add_padding(tf.expand_dims(chroma, 0))
+#     #expand_chroma = tf.expand_dims(padded_chroma[0], 1)
+#     #reshaped_chroma = tf.reshape(expand_chroma, [1, 1216, 12])
+
+#     return reshaped_padded
 
 
 def prepro_pipeline(audio_path):
     chroma = PCP(audio_path)[:, :1216]
-    padded_chroma = add_padding(tf.expand_dims(chroma, 0))
-    expand_chroma = tf.expand_dims(padded_chroma[0], 1)
-    reshaped_chroma = tf.reshape(expand_chroma, [1, 1216, 12])
+    padded_chroma = add_padding([chroma])
+    reshaped_padded = padded_chroma[0].reshape(1,1216*12)
 
-    return reshaped_chroma
+
+    #padded_chroma = add_padding(tf.expand_dims(chroma, 0))
+    #expand_chroma = tf.expand_dims(padded_chroma[0], 1)
+    #reshaped_chroma = tf.reshape(expand_chroma, [1, 1216, 12])
+
+    return reshaped_padded
