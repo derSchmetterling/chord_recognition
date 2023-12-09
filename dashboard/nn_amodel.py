@@ -53,7 +53,7 @@ def model_instance(hidden_layer):
 
 def load_model():
 
-    checkpoint_path = "models/svc_model.joblib"
+    checkpoint_path = "models/svc_model2.joblib"
     #checkpoint_dir = os.path.dirname(checkpoint_path)
 
     #latest = tf.train.latest_checkpoint(checkpoint_dir)
@@ -84,10 +84,11 @@ def load_predict(chroma):
     model = load_model()
     pred = model.predict_proba(chroma)
     df_pred = pd.DataFrame(pred, columns=model.classes_)
+    top3 = df_pred.sort_values(by = 0, axis = 1, ascending=False).iloc[:, :3]
 
     
 
-    return df_pred.sort_values(by = 0, axis = 1, ascending=False).iloc[:, :3]
+    return round(top3, 3)
 
 
     
