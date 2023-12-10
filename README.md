@@ -37,4 +37,4 @@ Abra o arquivo **models_pcp.ipynb** para ver os modelos testados para este traba
 
 ### 6. Dashboard
 
-Para rodar o dashbord basta escrever 'streamlit run dashboard/app.py' na linha de comando.
+Para rodar o dashbord basta escrever o comando 'streamlit run app.py' no diretório dashboard pelo terminal.
