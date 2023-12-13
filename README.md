@@ -38,3 +38,10 @@ Abra o arquivo **models_pcp.ipynb** para ver os modelos testados para este traba
 ### 6. Dashboard
 
 Para rodar o dashbord basta escrever o comando 'streamlit run app.py' no diretório dashboard/ pelo terminal.
+
+
+
+### Observações:
+
+As pastas old_preprocessing/ e old_models contém o pré-processamento usando Mel Spectogram e alguns modelos baseados em redes neurais. 
+Essas arquivos não são utilizados no projeto, porém estão aqui disponíveis para documentação.
