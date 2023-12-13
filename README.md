@@ -45,3 +45,4 @@ Para rodar o dashbord basta escrever o comando 'streamlit run app.py' no diretó
 
 As pastas old_preprocessing/ e old_models contém o pré-processamento usando Mel Spectogram e alguns modelos baseados em redes neurais. 
 Essas arquivos não são utilizados no projeto, porém estão aqui disponíveis para documentação.
+Algumas dependências referentes a essas pastas também não estão no arquivo requirements.txt.
