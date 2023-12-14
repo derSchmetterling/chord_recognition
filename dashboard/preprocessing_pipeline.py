@@ -8,6 +8,8 @@ import scipy
 
 
 
+
+## Gera o cromagrama do áudio enviado pelo usuário do dashboard
 def PCP(filepath, sr = 44100, filters = True):
 
     y, sr = librosa.load(filepath, sr=sr)
@@ -60,28 +62,13 @@ def add_padding(features, max_padding=1216):
     return padded
 
 
-# preprocessing for NN model
-# def prepro_pipeline(audio_path):
-#     chroma = PCP(audio_path)[:, :1216]
-#     padded_chroma = add_padding([chroma])
-#     reshaped_padded = padded_chroma[0].reshape(1,1216,12)
 
 
-#     #padded_chroma = add_padding(tf.expand_dims(chroma, 0))
-#     #expand_chroma = tf.expand_dims(padded_chroma[0], 1)
-#     #reshaped_chroma = tf.reshape(expand_chroma, [1, 1216, 12])
-
-#     return reshaped_padded
-
-
+# Corta o áudio enviado na duração máxima ou adiciona zeros em áudios com duração inferior a esperada
 def prepro_pipeline(audio_path):
     chroma = PCP(audio_path)[:, :1216]
     padded_chroma = add_padding([chroma])
     reshaped_padded = padded_chroma[0].reshape(1,1216*12)
 
-
-    #padded_chroma = add_padding(tf.expand_dims(chroma, 0))
-    #expand_chroma = tf.expand_dims(padded_chroma[0], 1)
-    #reshaped_chroma = tf.reshape(expand_chroma, [1, 1216, 12])
 
     return reshaped_padded
