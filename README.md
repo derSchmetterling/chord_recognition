@@ -8,7 +8,7 @@ Um resumo de todos os passos realizados neste projeto está disponível no arqui
 
 ## Como reproduzir esse repositório?
 
-Se você apenas deseja apenas reproduzir o dashboard, pode pular todos os passos definidos como opcionais.
+Se você apenas deseja reproduzir o dashboard, pode pular todos os passos definidos como opcionais.
 
 ### 1. (Opcional) Download dos dados
 Faça o download da base de dados em https://guitarset.weebly.com/ na pasta raiz do diretório.
