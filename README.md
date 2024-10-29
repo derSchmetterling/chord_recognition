@@ -45,3 +45,9 @@ The folders old_preprocessing/ and old_models contain preprocessing using Mel Sp
 These files are not used in the project but are available here for documentation purposes.
 Some dependencies related to these folders are also not in the requirements.txt file.
 
+
+### Video
+For Portuguese speakers, I have recorded an explanation of this project, available at: https://www.youtube.com/watch?v=2J0rBIaD7Tk. 
+If you don't speak Portuguese, you can check out how the dashboard works from 9:19 until the end of the video.
+
+
