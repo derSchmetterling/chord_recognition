@@ -1,48 +1,47 @@
-# Reconhecimento de Acordes
+# Chord Recognition
 
 
-## Relatório
+## Report
 
-Um resumo de todos os passos realizados neste projeto está disponível no arquivo **project_notebook.ipynb**.
-
-
-## Como reproduzir esse repositório?
-
-Se você apenas deseja reproduzir o dashboard, pode pular todos os passos definidos como opcionais.
-
-### 1. (Opcional) Download dos dados
-Faça o download da base de dados em https://guitarset.weebly.com/ na pasta raiz do diretório.
-Os arquivos aqui utilizados são **audio_hex-pickup_original** e **annotation**.
-Não é necessário descomprimir os arquivos.
+A summary of all steps performed in this project is available in the **project_notebook.ipynb** file.
 
 
-### 2. Dependências
-Faça o download das dependências disponíveis no arquivos **requirements.txt.**
+## How to reproduce this repository?
 
-### 3.  (Opcional) Preprocessamento
+If you only want to reproduce the dashboard, you can skip all steps marked as optional.
 
-Abra o arquivo **preprocess.ipynb** para ser guiado pelos procedimentos de preprocessamento.
+### 1. (Optional) Data Download
+Download the dataset at https://guitarset.weebly.com/ to the root folder of the directory.
+The files used here are **audio_hex-pickup_original** and **annotation**.
+It is not necessary to decompress the files.
 
-### 3.1 (Opcional) Análise Exploratória
+### 2. Dependencies
+Download the dependencies listed in the **requirements.txt** file.
 
-Uma rápida análise exploratória dos metadados extraídos é feita em **exploratory.ipynb.**
+### 3. (Optional) Preprocessing
 
-### 4.  (Opcional) Extração de Características
+Open the **preprocess.ipynb** file to be guided through the preprocessing procedures.
 
-Abra o arquivo **PCP.ipynb** para ser guiado pelos procedimentos de extração de características.
+### 3.1 (Optional) Exploratory Analysis
 
-### 5. (Opcional) Modelos
+A quick exploratory analysis of the extracted metadata is performed in **exploratory.ipynb.**
 
-Abra o arquivo **models_pcp.ipynb** para ver os modelos testados para este trabalho.
+### 4. (Optional) Feature Extraction
+
+Open the **PCP.ipynb** file to be guided through the feature extraction procedures.
+
+### 5. (Optional) Models
+
+Open the **models_pcp.ipynb** file to view the models tested in this project.
 
 ### 6. Dashboard
 
-Para rodar o dashbord basta escrever o comando 'streamlit run app.py' no diretório dashboard/ pelo terminal.
+To run the dashboard, simply enter the command `streamlit run app.py` in the dashboard/ directory from the terminal.
 
 
+### Notes:
 
-### Observações:
+The folders old_preprocessing/ and old_models contain preprocessing using Mel Spectrogram and some models based on neural networks.
+These files are not used in the project but are available here for documentation purposes.
+Some dependencies related to these folders are also not in the requirements.txt file.
 
-As pastas old_preprocessing/ e old_models contém o pré-processamento usando Mel Spectogram e alguns modelos baseados em redes neurais. 
-Essas arquivos não são utilizados no projeto, porém estão aqui disponíveis para documentação.
-Algumas dependências referentes a essas pastas também não estão no arquivo requirements.txt.
